@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+
+{% block body %}
+    <h1>{{ 'Hello world' | reverse }}</h1>
+
+    <div class="jumbotron">
+        <p class="lead">{{ title }}
+        <br>
+        Bienvenue, {{ user.firstname | upper }} {{ user.lastname | upper }} ! Votre email est {{ user.email }}. <br>
+        Votre drnier salaire est d'un montant de {{ '1000000' | format_currency('EUR', locale='fr') }}
+        </p>
+    </div>
+
+    <hr>
+
+    <ul>
+        {% for article in articles %}
+            <li>
+                <strong>{{ article.title }}</strong> :  <small>{{ article.content }}</small>
+            </li>
+        {% endfor %}
+    </ul>
+
+{% endblock %}
+
+{% block title %}
+{{ title }}
+{% endblock %}
+
+{% block javascripts %}
+<script>
+    alert('bienvenue ici !');
+</script>
+{% endblock %}

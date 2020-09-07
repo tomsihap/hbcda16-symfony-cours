@@ -1,0 +1,19 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Voir le produit : {{ product.title }}{% endblock %}
+
+{% block body %}
+
+    <a href="{{ path('product_index') }}">
+        <i class="fa fa-arrow-left" aria-hidden="true"></i> Retour à la liste des produits
+    </a>
+
+    <h1>#{{ product.id }} - {{ product.title }} - {{ product.price | format_currency('EUR', locale='fr') }}</h1>
+
+    <p class="lead">{{ product.description }}</p>
+
+    <hr>
+
+    <span class="badge badge-primary">{{ product.quantity }} unités en stock</span>
+
+{% endblock %}

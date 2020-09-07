@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des produits{% endblock %}
+
+{% block body %}
+
+    <h1>Tous nos produits</h1>
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Nom du produit</th>
+                <th>Description</th>
+                <th>Prix</th>
+                <th>Quantité en stock</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for product in products %}
+                <tr>
+                    <td>{{ product.id }}</td>
+                    <td>
+                        <a href="{{ path('product_show', { id : product.id }) }}">
+                            {{ product.title }}
+                        </a>
+                    </td>
+                    <td>{{ product.description }}</td>
+                    <td>{{ product.price | format_currency('EUR', locale='fr') }}</td>
+                    <td>{{ product.quantity }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}
