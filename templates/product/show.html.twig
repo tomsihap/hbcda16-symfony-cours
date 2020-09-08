@@ -16,4 +16,22 @@
 
     <span class="badge badge-primary">{{ product.quantity }} unités en stock</span>
 
+    <hr>
+
+    <a href="{{ path('product_edit', { id : product.id }) }}" class="btn btn-warning btn-sm">Éditer le produit</a>
+
+    <form action="{{ path('product_delete', { id : product.id }) }}" method="post">
+        <input type="hidden" name="token" value="{{ csrf_token('delete') }}">
+        <input type="hidden" name="_method" value="DELETE">
+        <button id="deleteButton" class="btn btn-danger btn-sm">Supprimer le produit</button>
+    </form>
+
+{% endblock %}
+
+{% block javascripts %}
+
+<script>
+    $('#deleteButton').on('click', () => { if ( !confirm('Ça va péter !') ) event.preventDefault(); });
+</script>
+
 {% endblock %}

@@ -98,7 +98,25 @@ class ProductController extends AbstractController
         return $this->render('product/edit.html.twig', [
             'editForm' => $form->createView()
         ]);
+    }
 
+    /**
+     * @Route("/products/{id}/delete", name="product_delete", methods={"DELETE"})
+     */
+    public function delete(Request $request, Product $product) {
+
+        $token = $request->request->get('token');
+
+        if ( $this->isCsrfTokenValid('delete', $token) ) {
+            $manager = $this->getDoctrine()->getManager();
+            $manager->remove($product);
+            $manager->flush();
+        }
+        else {
+            dd('Attention, vous êtes peut-être victime d\'une arnaque !');
+        }
+
+        return $this->redirectToRoute('product_index');
     }
 
     /**
