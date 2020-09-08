@@ -1,0 +1,32 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+
+<h1>Éditer un produit</h1>
+
+<form action="{{ path('products_update_traitement_old', { 'id' : product.id }) }}" method="post">
+
+    <div class="form-group">
+        <label for="">Titre</label>
+        <input name="title" type="text" class="form-control" value="{{ product.title }}">
+    </div>
+    <div class="form-group">
+        <label for="">Description</label>
+        <input name="description" type="text" class="form-control" value="{{ product.description }}">
+    </div>
+    <div class="form-group">
+        <label for="">Prix</label>
+        <input name="price" type="text" class="form-control" value="{{ product.price }}">
+    </div>
+    <div class="form-group">
+        <label for="">Quantité</label>
+        <input name="quantity" type="text" class="form-control" value="{{ product.quantity }}">
+    </div>
+
+    <button class="btn btn-warning float-right">Éditer le produit</button>
+
+</form>
+
+
+
+{% endblock %}

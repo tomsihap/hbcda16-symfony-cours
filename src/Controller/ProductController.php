@@ -101,4 +101,35 @@ class ProductController extends AbstractController
 
     }
 
+    /**
+     * Page d'affichage du formulaire (ancienne version)
+     *
+     * @Route("/products/{id}/updateOld", name="products_update_old", methods={"GET"})
+     */
+    public function updateOld(Product $product) {
+        return $this->render("product/updateOld.html.twig", [
+            'product' => $product
+        ]);
+    }
+
+    /**
+     * Traitement du formulaire (ancienne version)
+     *
+     * @Route("/products/{id}/updateOld", name="products_update_traitement_old", methods={"POST"})
+     *
+     */
+    public function updateTraitementOld(Request $request, Product $product) {
+
+        $product->setTitle( $request->request->get('title') );
+        $product->setDescription( $request->request->get('description'));
+        $product->setQuantity( $request->request->get('quantity'));
+        $product->setPrice($request->request->get('price'));
+
+        $manager = $this->getDoctrine()->getManager();
+        $manager->flush();
+
+        return $this->redirectToRoute('product_show', ['id' => $product->getId() ]);
+
+    }
+
 }
