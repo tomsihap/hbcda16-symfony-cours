@@ -32,7 +32,7 @@ class ProductController extends AbstractController
     }
 
     /**
-     * Affichage du formulaire
+     * Affichage ET traitement du formulaire
      *
      * @Route("/products/create", name="product_create", methods={"GET", "POST"}, priority=1)
      */
@@ -67,6 +67,38 @@ class ProductController extends AbstractController
         return $this->render('product/create.html.twig', [
             'formProduct' => $form->createView()
         ]);
+    }
+
+    /**
+     * Éditer un produit
+     *
+     * @Route("/products/{id}/edit", name="product_edit", methods={"GET", "POST"})
+     *
+     * // L'URL attend un paramètre (id)
+     * // Le routeur va rattacher ce paramètre au premier paramètre de la méthode de la route edit(Product $product)
+     * // Comme ce paramètre est typé Product (et non pas string, int...), Symfony va comprendre que le paramètre passé (id)
+     * // correspond à la clé primaire d'un objet Product en base de données.
+     * // Ainsi, en faisant Product $product, on récupère automatiquement l'objet $product correspondant.
+     *
+     * De plus, comme le paramètre est nommé "id" dans l'URL, alors il cherchera un Product par le champ "id".
+     */
+    public function edit(Request $request, Product $product) {
+        $form = $this->createForm(ProductType::class, $product);
+
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid()) {
+
+            $manager = $this->getDoctrine()->getManager();
+            $manager->flush();
+
+            return $this->redirectToRoute("product_show", ["id" => $product->getId() ]);
+        }
+
+        return $this->render('product/edit.html.twig', [
+            'editForm' => $form->createView()
+        ]);
+
     }
 
 }

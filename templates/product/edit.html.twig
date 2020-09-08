@@ -1,0 +1,17 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+
+<h1>Éditer un produit</h1>
+
+{{ form_start(editForm) }}
+
+    <input type="hidden" name="_method" value="PUT">
+
+    {{ form_widget(editForm) }}
+
+    <button class="btn btn-warning float-right">Éditer le produit</button>
+
+{{ form_end(editForm) }}
+
+{% endblock %}
