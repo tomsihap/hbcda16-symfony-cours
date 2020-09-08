@@ -2,28 +2,9 @@
 
 {% block body %}
 
-<form action="{{ path('product_new') }}" method="post">
-
-    <div class="form-group">
-        <label for="">Titre</label>
-        <input name="title" type="text" class="form-control">
-    </div>
-    <div class="form-group">
-        <label for="">Description</label>
-        <input name="description" type="text" class="form-control">
-    </div>
-    <div class="form-group">
-        <label for="">Prix</label>
-        <input name="price" type="text" class="form-control">
-    </div>
-    <div class="form-group">
-        <label for="">Quantité</label>
-        <input name="quantity" type="text" class="form-control">
-    </div>
-
-    <button class="btn btn-success float-right">Créer le produit</button>
-
-</form>
-
+{{ form_start(formProduct) }}
+    {{ form_widget(formProduct) }}
+    <button class="btn btn-primary float-right">Créer un produit</button>
+{{ form_end(formProduct) }}
 
 {% endblock %}
