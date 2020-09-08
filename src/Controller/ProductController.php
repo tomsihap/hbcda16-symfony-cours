@@ -69,31 +69,4 @@ class ProductController extends AbstractController
         ]);
     }
 
-    /**
-     * Traitement du formulaire
-     *
-     * @Route("/products", name="product_new", methods={"POST"})
-     */
-    public function new(Request $request) {
-
-        dd($this->container);
-
-        // Récupérer les paramètres POST du formulaire:
-        dump($request->request);
-
-        // Récupérer un paramètre POST :
-        dump($request->request->get('price'));
-
-        $product = new Product();
-        $product->setTitle( $request->request->get('title') );
-        $product->setDescription( $request->request->get('description'));
-        $product->setQuantity( $request->request->get('quantity'));
-        $product->setPrice($request->request->get('price'));
-
-        $this->entityManager->persist($product);
-        $this->entityManager->flush();
-
-        dd($product);
-
-    }
 }
